@@ -1,0 +1,84 @@
+.slider-comp {
+    position: relative;
+    width: 97%;
+  
+    .recommended-title {
+      margin: 0;
+      background-color: white;
+      display: inline-block;
+      padding: 10px 40px;
+      border-radius: 20px 200px 0 0;
+      @media (max-width: 768px) {
+        font-size: 12px !important;
+      }
+    }
+  
+    .recommended {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      position: relative;
+      background-color: white;
+      border-radius: 0 10px 10px 10px;
+  
+      .recommended-products {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px;
+        gap: 10px;
+  
+        .product {
+          scroll-snap-align: start;
+        }
+      }
+  
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background-color: transparent;
+      }
+    }
+  
+    .scroll-buttons {
+      position: absolute;
+      top: 55%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 10px;
+  
+      .scroll-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.7);
+          opacity: 0.7;
+        }
+      }
+  
+      .left {
+        background-color: gray;
+        opacity: 0.2;
+      }
+  
+      .right {
+        background-color: gray;
+        opacity: 0.2;
+      }
+    }
+  }
+  

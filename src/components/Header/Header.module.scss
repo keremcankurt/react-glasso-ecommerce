@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&family=Playwrite+AR:wght@100..400&display=swap');
+
+.container{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    .campaign {
+        background-color: black;
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        font-weight: bold;
+        color: white;
+        animation: blink 1s infinite; 
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      
+        @keyframes blink {
+          0% {
+            font-size: 16px;
+          }
+          50% {
+            font-size: 14px;
+          }
+          100% {
+            font-size: 16px;
+          }
+        }
+      }
+      
+    .mainNav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 100px;
+        background-color: #fff;
+        padding: 0 40px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 4px rgba($color: #000000, $alpha: 0.1);
+        @media screen and (max-width: 768px) {
+            padding: 0 20px;
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 24px;
+            font-family: "Edu AU VIC WA NT Hand", cursive;
+            font-optical-sizing: auto;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            .glasses{
+                font-size: 10px !important;
+                size: 10 !important;
+            }
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+                .glasses{
+                    width: 30px;
+                    height: 30px;
+                }
+              }
+            &:hover{
+                color: #666;
+            }
+        }
+        .headerRight{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            p {
+                padding: 10px 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                @media screen and (max-width: 768px) {
+                  font-size: 12px;
+                  padding: 7px 3px;
+                }
+    
+                a {
+                    text-decoration: none;
+                    color: #333;
+                    padding: 10px;
+                    transition: background-color 0.3s;
+    
+                    &:hover {
+                        background-color: #eee;
+                    }
+                }
+            }
+        }
+
+    }
+  }

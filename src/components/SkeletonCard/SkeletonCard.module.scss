@@ -1,0 +1,105 @@
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  padding-bottom: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin: 10px;
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 45vw;
+  }
+
+  .skeleton-img, .skeleton-stars, .skeleton-brand, .skeleton-name, .skeleton-price, .skeleton-buttons .skeleton-favorite, .skeleton-buttons .skeleton-cardButton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-img {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    @media screen and (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  .skeleton-stars {
+    position: absolute;
+    width: 40%;
+    height: 20px;
+    margin: 5px;
+    border-radius: 4px;
+    bottom: 0;
+    right: 0;
+  }
+
+  .skeleton-brand {
+    width: 100%;
+    height: 20px;
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+
+  .skeleton-name {
+    width: 70%;
+    height: 20px;
+    border-radius: 4px;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .skeleton-price {
+    width: 50%;
+    height: 20px;
+    border-radius: 4px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+
+  .skeleton-buttons {
+    position: absolute;
+    border-radius: 4px;
+    bottom: 0 !important;
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+
+    .skeleton-favorite {
+      width: 10%;
+      height: 30px;
+      border-radius: 5px;
+      margin-left: 5px;
+      @media screen and (max-width: 768px) {
+        width: 20%;
+      }
+
+    }
+
+    .skeleton-cardButton {
+      width: 40%;
+      height: 30px;
+      border-radius: 5px;
+      margin-right: 5px;
+      @media screen and (max-width: 768px) {
+        width: 50%;
+      }
+    }
+  }
+}

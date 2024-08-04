@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Combo&family=Open+Sans:ital,wght@0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Combo&family=Open+Sans:ital,wght@0,700;1,300&family=Oswald&display=swap');
+
+.loginContainer{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://cdn.discordapp.com/attachments/861272013174734871/1267577919924863017/a-stunning-3d-render-of-a-luxurious-eyewear-store--5AtOkupYTs2iQ4O7XpIWzw-ugsNarV8QRCq_PSYDNnnHg.jpeg?ex=66a94b6e&is=66a7f9ee&hm=58a52f2289acc5fc0a9224893d39722ee6a75d1109ef8e695129962dc0408df5&');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit;
+      background-size: inherit;
+      background-position: inherit;
+    }
+    .loginContent{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid rgba(95, 91, 91, 0.597);
+        border-radius: 40px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+                    0 10px 10px rgba(0,0,0,0.22);
+        padding: 10px 20px;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.8);
+        text-align: center;
+        .loginLogo{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: 'Oswald', sans-serif;
+            h1 {
+                color: #ff5722;
+                font-size: 45px;
+                margin-bottom: 5px;
+            }
+            
+              h2 {
+                color: #ff5722;
+                font-size: 25px;
+                margin-top: 0;
+             }
+        }
+        .loginMainContent{
+            width: 370px;
+            display: flex;
+            flex-direction: column;
+
+            .loginInputs{
+                display: flex;
+                flex-direction: column;
+                input {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 16px;
+                  }
+
+            }
+            .forgotPassword {
+                color: #ff5722;
+                text-decoration: none;
+                margin-bottom: 25px;
+                display: inline-block;
+                justify-self: flex-end;
+                align-self: flex-end;
+              }
+              .loginButton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 20px;
+                background-color: #ff5722;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-bottom: 20px;
+                &:disabled, &:hover{
+                  background-color: #ffffff;
+                  border: 1px solid #ff5722;
+                  color: #ff5722;
+                }
+                .spinner {
+                  border: 4px solid rgba(0, 0, 0, 0.1);
+                  border-left-color: #ff5722;
+                  border-radius: 50%;
+                  width: 24px;
+                  height: 24px;
+                  animation: spin 1s linear infinite;
+                }
+                
+                @keyframes spin {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+            }
+            .hasNotAccount {
+                font-size: 14px;
+                color: white;
+            
+                a {
+                  color: #ff5722;
+                  text-decoration: none;
+                }
+              }
+        }
+        .googleButton {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          color: rgb(112, 112, 112);
+          border: 1px solid gray;
+          padding: 10px;
+          cursor: pointer;
+          font-size: 14px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+        }
+        
+        .googleButton:hover {
+          background-color: #f5f3f3;
+        }
+    }
+}

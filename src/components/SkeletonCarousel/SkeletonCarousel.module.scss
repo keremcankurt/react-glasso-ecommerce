@@ -1,0 +1,41 @@
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.skeleton-carousel-img {
+  width: 97%;
+  height: 400px;
+  max-width: 1900px;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50px;
+  @media screen and (max-width: 768px) {
+    border-radius: 10px;
+    height: 200px;
+  }
+}
+
+.carouselImg{
+  border-radius: 50px;
+  @media screen and (max-width: 768px) {
+      border-radius: 10px !important;
+  }
+}
+.slider{
+  width: 97%;
+  border: 10px solid white !important;
+  border-radius: 50px !important;
+  overflow: hidden;
+  @media screen and (max-width: 768px) {
+      border-radius: 10px !important;
+      border: 5px solid white !important;
+  }
+}
+
+
