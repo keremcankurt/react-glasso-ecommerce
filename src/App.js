@@ -8,6 +8,11 @@ import Login from './pages/Login/Login';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import "react-toastify/dist/ReactToastify.css"
 import Product from './pages/Product/Product';
+import AdminLayout from './layouts/AdminLayout/AdminLayout';
+import AddProduct from './pages/AdminPanel/AddProduct/AddProduct';
+import PromotionalMessages from './pages/AdminPanel/AdManagement/PromotionalMessages/PromotionalMessages';
+import Banner from './pages/AdminPanel/AdManagement/Banner/Banner';
+import Products from './pages/AdminPanel/Products/Products';
 
 function App() {
   return (
@@ -16,6 +21,14 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+
+        <Route path='/admin' element={<AdminLayout />}>
+          <Route path='add-product' element={<AddProduct />}/>
+          <Route path='promotional-messages' element={<PromotionalMessages />}/>
+          <Route path='banner' element={<Banner />}/>
+          <Route path='products' element={<Products />}/>
+
+        </Route>
         <Route path='/' element={<HomeLayout/>}>
           <Route index={true} element={<HomePage/>}/>
           <Route path='product' element={<Product/>}/>

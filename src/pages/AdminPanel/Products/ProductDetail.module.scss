@@ -1,0 +1,254 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    max-width: 950px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 90vh;
+  
+    @media (max-width: 768px) {
+      max-width: 90%;
+      padding: 15px;
+    }
+  
+    @media (max-width: 480px) {
+      max-width: 95%;
+      padding: 10px;
+    }
+  
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+      font-weight: 600;
+  
+      @media (max-width: 480px) {
+        font-size: 1.2rem;
+      }
+    }
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      @media (max-width: 768px) {
+       align-items: center;
+      }
+    }
+  
+    .multiFormGroup {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+  
+      .formGroup {
+        width: 50%;
+  
+        @media (max-width: 768px) {
+          width: 90%;
+        }
+      }
+    }
+  
+    .formGroup {
+      display: flex;
+      flex-direction: column;
+      @media (max-width: 768px) {
+        width: 90%;
+      }
+    }
+  
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+    }
+  
+    input[type="text"],
+    input[type="number"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+  
+      @media (max-width: 480px) {
+        font-size: 14px;
+      }
+    }
+  
+    .customFileInput {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 2px dashed #28a745;
+      color: #28a745;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 18px;
+      transition: background-color 0.3s;
+  
+      @media (max-width: 480px) {
+        font-size: 16px;
+        padding: 8px;
+      }
+    }
+  
+    .customFileInput:hover {
+      background-color: #218838;
+      color: white;
+      border: 2px dashed white;
+    }
+  
+    .imagePreview {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  
+    .imageContainer {
+      position: relative;
+      width: 150px;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+  
+      @media (max-width: 480px) {
+        width: 120px;
+      }
+    }
+  
+    .imageContainer img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  
+    .removeButton {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      font-size: 18px;
+      background-color: rgba(255, 0, 0, 0.7);
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  
+    .removeButton:hover {
+      background-color: rgba(255, 0, 0, 0.9);
+    }
+  
+    .starsWrapper {
+      margin: 15px 0;
+    }
+  
+    .stars {
+      margin: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+  
+      .star {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-color: grey;
+        clip-path: polygon(
+          50% 0%,
+          63% 38%,
+          100% 38%,
+          69% 62%,
+          82% 100%,
+          50% 75%,
+          18% 100%,
+          31% 62%,
+          0% 38%,
+          37% 38%
+        );
+        position: relative;
+      }
+  
+      .star-o {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: orange !important;
+        box-sizing: border-box;
+      }
+    }
+  
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+  
+      @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 10px;
+      }
+  
+      button {
+        padding: 12px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        width: 25%;
+        margin-top: 15px;
+  
+        @media (max-width: 480px) {
+          width: 90%;
+        }
+      }
+  
+      button:hover {
+        background-color: #0056b3;
+      }
+  
+      .updateButton:disabled {
+        background-color: #ccc !important;
+        cursor: not-allowed;
+      }
+  
+      .deleteButton {
+        background-color: red;
+  
+        &:hover {
+          background-color: rgb(158, 45, 45);
+        }
+      }
+    }
+  }
+  

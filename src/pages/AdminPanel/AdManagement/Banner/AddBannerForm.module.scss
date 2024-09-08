@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.addButton {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #218838;
+  }
+}
+
+.form {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease, max-height 0.5s ease;
+
+  &.showForm {
+    max-height: 400px; /* Formun sığabileceği maksimum yükseklik */
+    opacity: 1;
+  }
+
+  .formContent {
+    padding: 20px;
+  }
+
+  .formGroup {
+    margin-bottom: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type='text'] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  }
+
+  .imageUploadLabel {
+    align-self: center;
+    display: block;
+    background-color: red;
+    position: relative;
+    width: 47%;
+    height: 200px;
+    border: 2px dashed #ced4da;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #dee2e6;
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .imageUploadInput {
+    display: none;
+  }
+
+  .submitButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

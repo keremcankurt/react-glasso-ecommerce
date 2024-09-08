@@ -1,0 +1,105 @@
+.adminLayout {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden; // İçeriğin taşmasını engellemek için
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    position: fixed; // Sidebar'ın sayfada sabit kalmasını sağlar
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%); // Başlangıçta gizle
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; // Sidebar'ın üstte görünmesini sağlar
+  
+    &.open {
+      transform: translateX(0); // Açıldığında göster
+    }
+  
+    .toggleBtn {
+      position: absolute;
+      top: 10px;
+      right: -50px; // Butonu sidebar'ın dışında tutar
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.3s ease-in-out;
+      z-index: 1001; // Butonu sidebar'ın üstünde tutar
+    }
+  
+    nav {
+      margin-top: 50px;
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          margin: 20px 0;
+          .activePage{
+            color: orange;
+            font-size: 19px;
+            text-decoration: underline;
+          }
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 10px; // Sidebar açıkken içeriği kaydırır
+  
+    &.shrink {
+      margin-left: 300px; // Sidebar kapalıyken içeriği tam genişlikte gösterir
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%); // Küçük ekranlarda başlangıçta gizle
+  
+      &.open {
+        transform: translateX(0); // Açıldığında göster
+      }
+    }
+  
+    .toggleBtn {
+      position: fixed; // Butonu sayfanın sağ üst köşesine sabitler
+      top: 10px;
+      right: 10px;
+      z-index: 1001; // Butonu diğer içeriklerin üstünde tutar
+    }
+  
+    .content {
+      margin-left: 0;
+  
+      &.shrink {
+        margin-left: 0; // Küçük ekranlarda içerik kaydırma
+      }
+    }
+  }
+  
