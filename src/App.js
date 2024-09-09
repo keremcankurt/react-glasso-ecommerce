@@ -13,8 +13,18 @@ import AddProduct from './pages/AdminPanel/AddProduct/AddProduct';
 import PromotionalMessages from './pages/AdminPanel/AdManagement/PromotionalMessages/PromotionalMessages';
 import Banner from './pages/AdminPanel/AdManagement/Banner/Banner';
 import Products from './pages/AdminPanel/Products/Products';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getBanners, getProducts, getPromotionalMessages } from './features/product/productSlice';
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getProducts())
+    dispatch(getBanners())
+    dispatch(getPromotionalMessages())
+  }, [dispatch]);
+
   return (
     <>
 

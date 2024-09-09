@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styles from './AddBannerForm.module.scss';
 import { toast } from 'react-toastify';
-import { addBanner } from '../../../../features/admin/adminService';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBanner } from '../../../../features/admin/adminSlice';
 
-export default function AddBannerForm({ setBanners }) {
+export default function AddBannerForm() {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
-  const [loading, setLoading] = useState(false);
-
+  const { isLoading } = useSelector((state) => state.admin)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -20,6 +20,7 @@ export default function AddBannerForm({ setBanners }) {
     }
   };
 
+  const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,23 +28,11 @@ export default function AddBannerForm({ setBanners }) {
       toast.error("Lütfen tüm alanları doldurunuz");
       return;
     }
-
-    setLoading(true);
-
-    try {
-      const response = await addBanner(JSON.stringify({ title, imageUrl: image }));
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.message);
-      }
-      toast.success(result.message);
-      setBanners(result.banners);
-      setTitle('');
-      setImage(null);
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
+    const resultAction = await dispatch(addBanner({title, imageUrl: image}));
+  
+    if (addBanner.fulfilled.match(resultAction)) {
+      setTitle('')
+      setImage('')
     }
   };
 
@@ -80,8 +69,8 @@ export default function AddBannerForm({ setBanners }) {
                 className={styles.imageUploadInput}
               />
             </div>
-            <button type='submit' className={styles.submitButton} disabled={loading}>
-              {loading ? 'Yükleniyor...' : 'Ekle'}
+            <button type='submit' className={styles.submitButton} disabled={isLoading}>
+              {isLoading ? 'Yükleniyor...' : 'Ekle'}
             </button>
           </form>
         )}

@@ -1,56 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../AdManagement.module.scss';
-import { deleteBanner, getBanners } from '../../../../features/admin/adminService';
-import { toast } from 'react-toastify';
 import AddBannerForm from './AddBannerForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteBanner } from '../../../../features/admin/adminSlice';
 
 export default function Banner() {
-    const [banners, setBanners] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [deleteLoading, setDeleteLoading] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const response = await getBanners();
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.message);
-                }
-                setBanners(result);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+    const { banners, isLoading } = useSelector((state) => state.product);
+    const { isLoading: adminLoading } = useSelector((state) => state.admin);
+
+    const dispatch = useDispatch();
+    
+    // Silinmekte olan banner'ın ID'sini tutan state
+    const [deletingBannerId, setDeletingBannerId] = useState(null);
 
     const handleDeleteBanner = async (id) => {
-        setDeleteLoading(id); // Set the loading state for the specific banner
-        try {
-            const response = await deleteBanner(id);
-            const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.message);
-            }
-            setBanners(result.banners); // Ensure to update with the correct key
-            toast.success(result.message);
-        } catch (error) {
-            toast.error(error.message);
-        } finally {
-            setDeleteLoading(null); // Reset loading state after the operation
-        }
+        setDeletingBannerId(id); // Tıklanan banner'ın ID'sini state'e ekle
+        await dispatch(deleteBanner(id));
+        setDeletingBannerId(null); // Silme işlemi bitince temizle
     };
 
     return (
         <div className={styles.container}>
             <div className={styles.bannerUpload}>
                 <h1>Banner Reklamlar</h1>
-                <AddBannerForm setBanners={setBanners} />
-                {loading ? (
+                <AddBannerForm />
+                {isLoading ? (
                     <p>Yükleniyor...</p>
                 ) : (
                     <table>
@@ -70,9 +45,9 @@ export default function Banner() {
                                         <td>
                                             <button 
                                                 onClick={() => handleDeleteBanner(banner?.id)}
-                                                disabled={deleteLoading === banner?.id}
+                                                disabled={deletingBannerId === banner?.id || adminLoading}
                                             >
-                                                {deleteLoading === banner?.id ? 'Siliniyor...' : 'Sil'}
+                                                {deletingBannerId === banner?.id ? 'Siliniyor...' : 'Sil'}
                                             </button>
                                         </td>
                                     </tr>

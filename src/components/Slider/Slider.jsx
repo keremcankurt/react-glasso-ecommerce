@@ -2,10 +2,11 @@ import React, { useRef } from 'react'
 import styles from './Slider.module.scss'
 import Product from '../Product/Product';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
+import { useSelector } from 'react-redux';
 
 export default function Slider({products, text}) {
     const containerRef = useRef(null);
-
+    const { isLoading } = useSelector((state) => state.product)
   const handleScrollLeft = () => {
     const container = containerRef.current;
     container.scrollBy({
@@ -26,9 +27,18 @@ export default function Slider({products, text}) {
         <h3 className={styles["recommended-title"]}>{text}</h3>
         <div className={styles["recommended"]} ref={containerRef}>
           <div className={styles["recommended-products"]} ref={containerRef}>
-            {products?.map((product) => (
-              <Product key={product._id} product={product} />
-            ))}
+            {
+              isLoading ? (
+                Array.from({ length: 10 }).map((_, index) => (
+                  <SkeletonCard key={index} />
+                ))
+              ) : (
+                products?.map((product) => (
+                  <Product key={product._id} product={product} />
+                ))
+              )
+            }
+
           </div>
         </div>
         <div className={styles["scroll-buttons"]}>

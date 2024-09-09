@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import styles from './PromotionalMessages.module.scss';
 import { toast } from 'react-toastify';
-import { addPromotionalMessage } from '../../../../features/admin/adminService';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPromotionalMessage } from '../../../../features/admin/adminSlice';
 
 export default function AddPromotionalMessageForm({ setPromotionalMessages }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
-  const [loading, setLoading] = useState(false); // Yeni yükleniyor durumu
+  const { isLoading } = useSelector((state) => state.admin)
 
+  const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,21 +17,10 @@ export default function AddPromotionalMessageForm({ setPromotionalMessages }) {
       toast.error("Lütfen mesaj alanını doldurunuz");
       return;
     }
-
-    setLoading(true); // Form gönderilme işlemi başladığında yükleniyor durumunu true yap
-    try {
-      const response = await addPromotionalMessage(JSON.stringify({ title }));
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.message);
-      }
-      toast.success(result.message);
-      setPromotionalMessages(result.messages);
-      setTitle('');
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false); // İşlem tamamlandığında yükleniyor durumunu false yap
+    const resultAction = await dispatch(addPromotionalMessage({ title }));
+  
+    if (addPromotionalMessage.fulfilled.match(resultAction)) {
+      setTitle('')
     }
   };
 
@@ -50,8 +41,8 @@ export default function AddPromotionalMessageForm({ setPromotionalMessages }) {
               name='title'
               onChange={(e) => setTitle(e.target.value)}
             />
-            <button type='submit' disabled={loading}>
-              {loading ? 'Yükleniyor...' : 'Ekle'}
+            <button type='submit' disabled={isLoading}>
+              {isLoading ? 'Yükleniyor...' : 'Ekle'}
             </button>
           </form>
         )}

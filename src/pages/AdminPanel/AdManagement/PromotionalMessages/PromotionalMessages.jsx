@@ -1,53 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import styles from '../AdManagement.module.scss'
-import { deletePromotionalMessage, getPromotionalMessages } from '../../../../features/admin/adminService'
-import { toast } from 'react-toastify'
-import AddPromotionalMessageForm from './AddPromotionalMessageForm'
+import React, { useState } from 'react';
+import styles from '../AdManagement.module.scss';
+import AddPromotionalMessageForm from './AddPromotionalMessageForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { delPromotionalMessage } from '../../../../features/admin/adminSlice';
 
 export default function PromotionalMessages() {
-    const [promotionalMessages, setPromotionalMessages] = useState([]);
-    const [loading, setLoading] = useState(false); // Yükleniyor durumu
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); // Veri yüklenmeye başladığında yükleniyor durumunu true yap
-            try {
-                const response = await getPromotionalMessages();
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.message);
-                }
-                setPromotionalMessages(result);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setLoading(false); // Veri yüklenme tamamlandığında yükleniyor durumunu false yap
-            }
-        }
-        fetchData();
-    }, []);
+    const { promotionalMessages, isLoading } = useSelector((state) => state.product);
+    const dispatch = useDispatch();
+    
+    // Silinmekte olan mesajların ID'lerini tutan state
+    const [deletingMessages, setDeletingMessages] = useState([]);
 
     const handleDeletePromotionalMessage = async (id) => {
-        try {
-            const response = await deletePromotionalMessage(id);
-            const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.message);
-            }
-            setPromotionalMessages(result.messages);
-            toast.success(result.message);
-        } catch (error) {
-            toast.error(error.message);
-        }
-    }
+        setDeletingMessages((prev) => [...prev, id]); // Silinen mesajı ekle
+        await dispatch(delPromotionalMessage(id));
+        setDeletingMessages((prev) => prev.filter(messageId => messageId !== id)); // Silme tamamlanınca çıkar
+    };
 
     return (
         <div className={styles.container}>
             <div className={styles.promotionalMessages}>
                 <h1>Reklam Mesajları</h1>
-                <AddPromotionalMessageForm setPromotionalMessages={setPromotionalMessages} />
-                {loading ? (
-                     <p>Yükleniyor...</p>
+                <AddPromotionalMessageForm />
+                {isLoading ? (
+                    <p>Yükleniyor...</p>
                 ) : (
                     promotionalMessages && promotionalMessages.length > 0 ? (
                         <table>
@@ -61,16 +37,23 @@ export default function PromotionalMessages() {
                                 {promotionalMessages.map(promotionalMessage => (
                                     <tr key={promotionalMessage.id}>
                                         <td>{promotionalMessage.title}</td>
-                                        <td><button onClick={() => handleDeletePromotionalMessage(promotionalMessage.id)}>Sil</button></td>
+                                        <td>
+                                            <button
+                                                onClick={() => handleDeletePromotionalMessage(promotionalMessage.id)}
+                                                disabled={deletingMessages.includes(promotionalMessage.id)}
+                                            >
+                                                {deletingMessages.includes(promotionalMessage.id) ? 'Siliniyor...' : 'Sil'}
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     ) : (
-                        <span>Reklam mesajınız bulunmaktadır.</span>
+                        <span>Reklam mesajınız bulunmamaktadır.</span>
                     )
                 )}
             </div>
         </div>
-    )
+    );
 }

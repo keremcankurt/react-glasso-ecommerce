@@ -2,27 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { GiSunglasses } from 'react-icons/gi';
-import { getPromotionalMessages } from '../../features/admin/adminService';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const [promotionText, setPromotionText] = useState('');
-  const [promotionalMessages, setPromotionalMessages] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const response = await getPromotionalMessages();
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.message);
-        }
-        setPromotionalMessages(result);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchData();
-  }, []);
+  const { promotionalMessages } = useSelector((state) => state.product)
 
   useEffect(() => {
     if (promotionalMessages.length === 0) return;

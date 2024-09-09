@@ -1,40 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { FaInfoCircle } from "react-icons/fa";
-import { getProducts } from '../../../features/product/productService';
-import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners'; 
 import ProductDetail from './ProductDetail';
-import { deleteProduct, updateProduct } from '../../../features/admin/adminService';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../features/product/productSlice';
+import { removeProduct, updateProduct } from '../../../features/admin/adminSlice';
 
 export default function Products() {
-    const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [inStockOnly, setInStockOnly] = useState(false); 
-    const [loading, setLoading] = useState(true);
+    const {products, isLoading} = useSelector(
+        (state) => state.product
+      );
+
+    const {isLoading: adminLoading} = useSelector(
+        (state) => state.admin
+      );
 
     const [selectedProduct, setSelectedProduct] = useState(null)
 
+    const dispatch = useDispatch()
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const response = await getProducts();
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.message);
-                }
-                setProducts(result);
-                setFilteredProducts(result);
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+        dispatch(getProducts())
+    }, [dispatch]);
 
     // Filtreleme ve arama
     useEffect(() => {
@@ -52,42 +42,14 @@ export default function Products() {
     const handleInStockChange = () => setInStockOnly(!inStockOnly);
 
     const handleDeleteProductById = async() => {
-        setLoading(true);
-        try {
-            const response = await deleteProduct(selectedProduct._id);
-            const result = await response.json();
-            if(!response.ok){
-                throw new Error(result.message)
-            }
-            const updatedProducts = products.filter(p => p._id !== selectedProduct._id)
-            setProducts(updatedProducts)
-            toast.success(result.message)
-        } catch (error) {
-            toast.error(error.message)
-        }
-        finally{
-            setLoading(false);
-        }
+        dispatch(removeProduct(selectedProduct._id))
     }
 
     const handleUpdateProductById = async(data) => {
-        try {
-            setLoading(true);
-            const response = await updateProduct(selectedProduct._id, JSON.stringify(data))
-            const result = await response.json()
-            if(!response.ok){
-                throw new Error(result.message)
-            }
-            const updatedProducts = products.map(p => 
-                p._id === selectedProduct._id ? result.updatedProduct : p)
-            setProducts(updatedProducts)
-            toast.success(result.message)
-        } catch (error) {
-            toast.error(error.message)
-        }
-        finally{
-            setLoading(false);
-        }
+        dispatch(updateProduct({
+            _id: selectedProduct._id,
+            updatedProduct: data
+        }))
     }
     return (
         <div className={styles.container}>
@@ -109,9 +71,9 @@ export default function Products() {
                 </label>
             </div>
 
-            {loading ? (
+            {isLoading || adminLoading ? (
                 <div className={styles.loading}>
-                    <ClipLoader size={50} color="#007bff" /> {/* ClipLoader kullanıldı */}
+                    <ClipLoader size={50} color="#007bff" />
                 </div>
             ) : (
                 <div className={`${styles.products} ${styles.fadeIn}`}>

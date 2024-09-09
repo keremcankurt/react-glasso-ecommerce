@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import styles from './AddProduct.module.scss';
-import { toast } from 'react-toastify';
-import { addProduct } from '../../../features/admin/adminService';
+import { useDispatch, useSelector } from 'react-redux';
+import { createNewProduct } from '../../../features/admin/adminSlice';
 
 export default function AddProduct() {
 
+  const { isLoading } = useSelector((state) => state.admin)
   const [product, setProduct] = useState({
     name: '',
     brand: '',
@@ -12,7 +13,7 @@ export default function AddProduct() {
     stock: '',
     images: []
   });
-  const fileInputRef = useRef(null); // File input referansı
+  const fileInputRef = useRef(null); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +24,7 @@ export default function AddProduct() {
   };
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files).slice(0, 5 - product.images.length); // En fazla 5 resim
+    const files = Array.from(e.target.files).slice(0, 5 - product.images.length);
     const imagePromises = files.map(file => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -54,27 +55,22 @@ export default function AddProduct() {
     }
   };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
-    try {
-      const response = await addProduct(JSON.stringify(product))
-      const result = await response.json()
-      console.log(result)
-      if(!response.ok){
-        throw new Error(result.message)
-      }
+  const dispatch = useDispatch()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const resultAction = await dispatch(createNewProduct(product));
+  
+    if (createNewProduct.fulfilled.match(resultAction)) {
       setProduct({
         name: '',
         brand: '',
         price: '',
         stock: '',
         images: []
-      })
-      toast.success(result.message)
-    } catch (error) {
-      toast.error(error.message);
+      }); 
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -89,6 +85,7 @@ export default function AddProduct() {
             value={product.name}
             onChange={handleChange}
             required
+            disabled={isLoading} // Burada inputu disabled yapıyoruz
           />
         </div>
         <div className={styles.formGroup}>
@@ -100,6 +97,7 @@ export default function AddProduct() {
             value={product.brand}
             onChange={handleChange}
             required
+            disabled={isLoading}
           />
         </div>
         <div className={styles.multiFormGroup}>
@@ -114,6 +112,7 @@ export default function AddProduct() {
               required
               min="0"
               step="0.01"
+              disabled={isLoading}
             />
           </div>
           <div className={styles.formGroup}>
@@ -126,6 +125,7 @@ export default function AddProduct() {
               onChange={handleChange}
               required
               min="0"
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -141,6 +141,7 @@ export default function AddProduct() {
             onChange={handleImageChange}
             ref={fileInputRef}
             hidden
+            disabled={isLoading}
           />
           <label htmlFor="images" className={styles.customFileInput}>
             Resim Seç
@@ -152,6 +153,7 @@ export default function AddProduct() {
                   type="button"
                   className={styles.removeButton}
                   onClick={() => removeImage(index)}
+                  disabled={isLoading}
                 >
                   &times;
                 </button>
@@ -161,16 +163,19 @@ export default function AddProduct() {
         </div>
         <button
           type="submit"
-          className={styles.submitButton}
+          className={`${styles.submitButton} ${isLoading ? 'loading' : ''}`}
           disabled={product.images.length < 1
             || !product.name
-            ||!product.brand
-            || !product.stock 
-            || !product.price}
+            || !product.brand
+            || !product.stock
+            || !product.price
+            || isLoading
+          }
         >
           Ekle
         </button>
       </form>
+
     </div>
   );
 }
