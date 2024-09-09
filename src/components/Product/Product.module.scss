@@ -54,10 +54,7 @@
       .productImg {
         width: 100%;
         object-fit: contain;
-        height: 120px;
-        @media screen and (max-width: 768px) {
-          height: 100px;
-        }
+        height: auto;
       }
     }
   

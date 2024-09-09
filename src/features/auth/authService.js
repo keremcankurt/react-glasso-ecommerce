@@ -1,5 +1,5 @@
 import {get, post, put} from '../request';
-const BASE_URL = "http://localhost:4000/api/auth";
+const BASE_URL = "http://192.168.1.109:4000/api/auth";
 
 const login = (data) =>  post(`${BASE_URL}/login`,data, 'application/json');
 const logout = (data) =>  get(`${BASE_URL}/logout`);

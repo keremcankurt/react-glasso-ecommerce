@@ -1,12 +1,11 @@
 import Slider from '../../components/Slider/Slider'
-import { products } from '../../utils/product'
 import styles from './HomePage.module.scss'
 import React from 'react'
 import SkeletonCarousel from '../../components/SkeletonCarousel/SkeletonCarousel';
 import { useSelector } from 'react-redux';
 export default function HomePage() {
 
-  const { banners, isLoading } = useSelector((state) => state.product)
+  const { products, banners, isLoading } = useSelector((state) => state.product)
 
   return (
     <div className={styles.container}>

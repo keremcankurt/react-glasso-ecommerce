@@ -21,7 +21,7 @@ export default function Product({ product }) {
       <Link to={`/product?id=${product._id}`} className={`${styles["productComp"]} ${product.stock === 0 ? styles['soldOut'] : ''}`}>
         {(product.campaign?.endDate) > new Date() && <p className={styles["campaign"]}>%{product.campaign.discountPercentage}</p>}
         <div className={`${styles['product-img-container']} ${product.stock === 0 ? styles['sold-out'] : ''}`}>
-          <img className={styles["productImg"]} src={`${product?.img}`} alt="product" />
+          <img className={styles["productImg"]} src={`${product?.images[0]}`} alt="product" />
         </div>
         <div className={styles["product-reviews"]}>
           <p className={styles["stars"]}>
