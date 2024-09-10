@@ -6,14 +6,16 @@ import { useSelector } from 'react-redux';
 
 export default function AdminLayout() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useSelector(
-    (state) => state.auth
+  const { user, isSuccess, isError } = useSelector(
+    (state) => state.user
   );
 
   const navigation = useNavigate()
   useEffect(() => {
-    if(!user || user.role !== 'admin') navigation("/")
-  }, [user, navigation])
+    if(isError) navigation("/")
+    if(!isSuccess) return
+    if( !user || user.role !== 'admin') navigation("/")
+  }, [user, navigation, isSuccess, isError])
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };

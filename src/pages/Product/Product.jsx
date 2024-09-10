@@ -14,8 +14,8 @@ export default function Product() {
     const [quantity, setQuantity] = useState(1);
     const [sortOption, setSortOption] = useState("newest");
 
-    const {user: authUser} = useSelector(
-      (state) => state.auth
+    const {user} = useSelector(
+      (state) => state.user
     );
     const handleSortChange = (event) => {
       setSortOption(event.target.value);

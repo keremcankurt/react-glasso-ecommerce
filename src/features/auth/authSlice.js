@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 import authService from "./authService";
+import { loginUser, logoutUser } from "../user/userSlice";
 
 
-const user = JSON.parse(localStorage.getItem("user"));
 const initialState = {
-  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -18,7 +17,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     if (!response.ok) {
       throw new Error(result.message);
     }
-    localStorage.setItem('user',JSON.stringify(result));
+    thunkAPI.dispatch(loginUser(result))
     return result;
   } catch (error) {
     toast.error(error.message);
@@ -32,8 +31,9 @@ export const logout = createAsyncThunk('auth/logout', async (data=null,thunkAPI)
     if (!response.ok) {
       throw new Error(result.message);
     }
-    localStorage.removeItem('user');
+    //düzenle
     toast.success(result.message);
+    thunkAPI.dispatch(logoutUser())
     return result;
   } catch (error) {
     toast.error(error.message);
@@ -110,14 +110,6 @@ export const confirmAccount = createAsyncThunk('auth/confirmAccount', async (dat
         state.isLoading = false;
         state.message = "";
       },
-      logoutUser: (state) => {
-        state.isError = false;
-        state.isSuccess = false;
-        state.isLoading = false;
-        state.message = "";
-        state.user = null;
-        localStorage.removeItem("user");
-      },
     },
     extraReducers: (builder) => {
         builder
@@ -126,7 +118,6 @@ export const confirmAccount = createAsyncThunk('auth/confirmAccount', async (dat
         })
         .addCase(login.fulfilled, (state,action) => {
           state.isLoading = false
-          state.user = action.payload;
         })
         .addCase(login.rejected, (state,action) => {
           state.isLoading = false
@@ -178,11 +169,10 @@ export const confirmAccount = createAsyncThunk('auth/confirmAccount', async (dat
           state.isSuccess = false
           state.isError = false
           state.message = ""
-          state.user = null
         })
     }
 
 });
 
-export const { reset, logoutUser } = authSlice.actions;
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;

@@ -23,9 +23,11 @@ import {
   getRecommendedProducts,
 } from './features/product/productSlice';
 import AddCampaign from './pages/AdminPanel/AddCampaign/AddCampaign';
+import { profile } from './features/user/userSlice';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
+    dispatch(profile())
     dispatch(getProducts())
     dispatch(getRecommendedProducts())
     dispatch(getBanners())

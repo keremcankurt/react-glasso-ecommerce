@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 import adminService from "./adminService";
-import { logoutUser } from "../auth/authSlice";
+import { logoutUser } from "../user/userSlice";
 import { addProduct, 
   deleteProduct, 
   updatePromMessages,

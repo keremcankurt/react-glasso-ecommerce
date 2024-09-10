@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './AddCampaign.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCampaign } from '../../../features/admin/adminSlice';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 
 export default function AddCampaign() {
   const { products, isLoading } = useSelector((state) => state.product);
@@ -10,7 +11,7 @@ export default function AddCampaign() {
   const [endDate, setEndDate] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState('');
 
-  const currentDate = new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' });
+  const currentDate = new Date();
   const formattedDate = new Date(currentDate).toISOString().slice(0, 16);
   
 
@@ -45,6 +46,10 @@ export default function AddCampaign() {
   }
   const isFormValid = selectedProducts.length > 0 && endDate && discountPercentage;
 
+  if(isLoading)
+    return (
+      <LoadingSpinner/>
+  )
   return (
     <div className={styles.container}>
       <div className={styles.leftBar}>

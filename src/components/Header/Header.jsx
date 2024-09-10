@@ -17,9 +17,9 @@ export default function Header() {
         const nextIndex = (currentIndex + 1) % promotionalMessages.length;
         return promotionalMessages[nextIndex];
       });
-    }, 3000); // 3 saniyede bir değişir
+    }, 3000); 
 
-    return () => clearInterval(interval); // Temizlik
+    return () => clearInterval(interval); 
   }, [promotionalMessages]);
   return (
     <nav className={styles.container}>

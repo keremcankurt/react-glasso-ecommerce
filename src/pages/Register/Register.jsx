@@ -20,8 +20,11 @@ export default function Register() {
 
   const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { user, isLoading, isSuccess} = useSelector(
+    const { isLoading, isSuccess} = useSelector(
         (state) => state.auth
+    );
+    const { user } = useSelector(
+        (state) => state.user
     );
     useEffect(() => {
         if (user) {

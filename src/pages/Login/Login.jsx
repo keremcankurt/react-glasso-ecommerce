@@ -9,7 +9,10 @@ export default function Login() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isLoading} = useSelector(
+  const { user} = useSelector(
+    (state) => state.user
+  );
+  const { isLoading } = useSelector(
     (state) => state.auth
   );
   useEffect(() => {

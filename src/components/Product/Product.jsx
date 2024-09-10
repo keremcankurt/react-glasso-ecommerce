@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import styles from './Product.module.scss';
 import { formatPrice } from '../../utils/product';
+import { useDispatch, useSelector } from 'react-redux';
+import { favProduct } from '../../features/user/userSlice';
 
 const productCardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -11,8 +13,24 @@ const productCardVariants = {
 };
 
 export default function Product({ product }) {
-  const currentDate = new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' });
+  const currentDate = new Date();
   const campaignDate = new Date(product.campaign?.endDate) > currentDate
+  const [isFavorited, setIsFavorited] = useState(false);
+  const { user } = useSelector((state) => state.user)
+
+  useEffect(() => {
+    if (user?.favProducts && product) {
+      const isProductFavorited = user.favProducts.some((id) => id === product._id);
+      setIsFavorited(isProductFavorited);
+    }
+  }, [user, product]);
+
+  const dispatch = useDispatch()
+  const handleFavorite = (e) => {
+    e.preventDefault();
+    setIsFavorited((prevValue) => !prevValue);
+    dispatch(favProduct(product._id));
+  };
   return (
     <motion.div
       initial="hidden"
@@ -84,9 +102,11 @@ export default function Product({ product }) {
         </div>
         <div className={styles["buttons"]}>
           <div className={styles["actions"]}>
-            <button className={styles[`add-to-favorites`]}>
-              <FaHeart />
-            </button>
+            {user && (
+                <button className={`${styles['add-to-favorites']} ${isFavorited ? `${styles['favorited']}` : ''}`} onClick={handleFavorite}>
+                  <FaHeart />
+                </button>
+              )}
             {product.stock !== 0 && (
               <>
                 <button className={styles["add-to-cart"]}>

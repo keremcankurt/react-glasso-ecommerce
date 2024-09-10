@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { FaInfoCircle } from "react-icons/fa";
-import { ClipLoader } from 'react-spinners'; 
 import ProductDetail from './ProductDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../features/product/productSlice';
 import { removeProduct, updateProduct } from '../../../features/admin/adminSlice';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 
 export default function Products() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [filterType, setFilterType] = useState('all'); // Dropdown için state
+    const [filterType, setFilterType] = useState('all');
     const { products, recommendedProducts, isLoading } = useSelector(
         (state) => state.product
     );
@@ -66,6 +66,10 @@ export default function Products() {
         }));
     };
 
+    if(isLoading || adminLoading)
+        return(
+            <LoadingSpinner/>
+        )
     return (
         <div className={styles.container}>
             <div className={styles.filterSection}>
@@ -86,12 +90,6 @@ export default function Products() {
                     </select>
                 </div>
             </div>
-
-            {isLoading || adminLoading ? (
-                <div className={styles.loading}>
-                    <ClipLoader size={50} color="#007bff" />
-                </div>
-            ) : (
                 <div className={`${styles.products} ${styles.fadeIn}`}>
                     <table>
                         <thead>
@@ -141,7 +139,6 @@ export default function Products() {
                         />
                     )}
                 </div>
-            )}
         </div>
     );
 }
