@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal'; // Modal için bir kütüphane kullanıyoruz (react-modal gibi)
 import styles from './ProductDetail.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRecommendedProduct, deleteRecommendedProduct } from '../../../features/admin/adminSlice';
 
 Modal.setAppElement('#root'); // Modal root ayarı
 
@@ -10,7 +12,9 @@ export default function ProductDetail({ product,
   handleUpdateProductById
  }) {
   const [formData, setFormData] = useState({});
-
+  const { recommendedProducts } = useSelector(
+    (state) => state.product
+);
   useEffect(() => {
     setFormData({
       name: product.name,
@@ -75,6 +79,14 @@ export default function ProductDetail({ product,
     }
   };
 
+  const dispatch = useDispatch()
+
+  const handleAddRecommendedProduct = () => {
+    dispatch(addRecommendedProduct(product._id))
+  }
+  const handleDeleteRecommendedProduct = () => {
+    dispatch(deleteRecommendedProduct(product._id))
+  }
   return (
     <div>
       <Modal
@@ -166,8 +178,8 @@ export default function ProductDetail({ product,
           </div>
         </div>
       </div>
-        <p>Yorumlar: {product.comments.length}</p>
-        <p>Favoriler: {product.favs.length}</p>
+        <p>Yorumlar: {product?.comments?.length}</p>
+        <p>Favoriler: {product?.favs?.length}</p>
         <div className={styles.starsWrapper}>
           <p className={styles["stars"]}>
             {[1, 2, 3, 4, 5].map((star) => (
@@ -182,7 +194,7 @@ export default function ProductDetail({ product,
                 ></span>
               </span>
             ))}
-            ({product.comments.length})
+            ({product?.comments?.length})
           </p>
         </div>
         <div className={styles.buttons}>
@@ -199,6 +211,12 @@ export default function ProductDetail({ product,
             </button>
             <button className={styles.deleteButton} onClick={handleDelete}>Sil</button>
             <button onClick={handleCloseModal}>Kapat</button>
+            {
+              recommendedProducts.includes(product._id) ?
+              <button onClick={handleDeleteRecommendedProduct}>Tavsiye Edilenlerden Çıkart</button>
+              :
+              <button onClick={handleAddRecommendedProduct}>Tavsiye Edilenlere Ekle</button>
+            }
         </div>
       </Modal>
     </div>

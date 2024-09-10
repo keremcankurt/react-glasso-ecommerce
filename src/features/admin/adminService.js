@@ -12,13 +12,21 @@ const deletePromotionalMessage = (id) =>  del(`${BASE_URL}/delete-promotional-me
 const addBanner = (data) =>  post(`${BASE_URL}/add-banner`, data, 'application/json');
 const deleteBanner = (id) =>  del(`${BASE_URL}/delete-banner/${id}`);
 
+const addRecommendedProduct = (id) =>  post(`${BASE_URL}/add-recommended-product/${id}`);
+const deleteRecommendedProduct = (id) =>  del(`${BASE_URL}/delete-recommended-product/${id}`);
+
+const updateCampaign = (data) =>  put(`${BASE_URL}/update-campaign`,data, 'application/json');
+
 const adminService = {
     addBanner,
     addProduct,
     deleteBanner,
     deleteProduct,
     updateProduct,
+    updateCampaign,
     addPromotionalMessage,
+    addRecommendedProduct,
+    deleteRecommendedProduct,
     deletePromotionalMessage,
 }
 

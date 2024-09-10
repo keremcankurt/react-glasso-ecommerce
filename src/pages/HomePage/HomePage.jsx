@@ -5,15 +5,15 @@ import SkeletonCarousel from '../../components/SkeletonCarousel/SkeletonCarousel
 import { useSelector } from 'react-redux';
 export default function HomePage() {
 
-  const { products, banners, isLoading } = useSelector((state) => state.product)
+  const { recommendedProducts, products, banners, isLoading } = useSelector((state) => state.product)
 
   return (
     <div className={styles.container}>
       
       <SkeletonCarousel isLoading={isLoading} images={banners}/>
-      <Slider products={products} text="İndirimli Ürünler"/>
-      <Slider products={products} text="Tavsiye Edilenler"/>
-      <Slider products={products} text="Trend Ürünler"/>
+      <Slider products={products?.filter(p => recommendedProducts?.includes(p?._id))} text="Tavsiye Edilen Ürünler"/>
+      <Slider products={[]} text=""/>
+      <Slider products={[]} text=""/>
     </div>
   )
 }

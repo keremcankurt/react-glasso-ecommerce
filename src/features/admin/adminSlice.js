@@ -6,7 +6,10 @@ import { addProduct,
   deleteProduct, 
   updatePromMessages,
   updateProduct as _updateProduct,
-  updateBanners, 
+  updateBanners,
+  _addRecommendedProduct,
+  delRecommendedProduct,
+  addCampaign, 
 } from "../product/productSlice";
 
 
@@ -59,7 +62,7 @@ export const updateProduct = createAsyncThunk('admin/update-product', async (dat
     if (!response.ok) {
       throw new Error(result.message);
     }
-    thunkAPI.dispatch(_updateProduct(data))
+    thunkAPI.dispatch(_updateProduct({_id: data._id, updatedProduct: result.updatedProduct}))
     toast.success(result.message)
     return result.message;
   } catch (error) {
@@ -145,6 +148,61 @@ export const deleteBanner = createAsyncThunk('admin/delete-banner', async (id, t
   }
 });
 
+export const addRecommendedProduct = createAsyncThunk('admin/add-recommended-product', async (id, thunkAPI) => {
+  try {
+    const response = await adminService.addRecommendedProduct(id);
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+    thunkAPI.dispatch(_addRecommendedProduct(id))
+    toast.success(result.message)
+    return result.message;
+  } catch (error) {
+    toast.error(error.message);
+    if(error.message === "You are not authorized to access this route"){
+      thunkAPI.dispatch(logoutUser());
+    }
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const deleteRecommendedProduct = createAsyncThunk('admin/delete-recommended-product', async (id, thunkAPI) => {
+  try {
+    const response = await adminService.deleteRecommendedProduct(id);
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+    thunkAPI.dispatch(delRecommendedProduct(id))
+    toast.success(result.message)
+    return result.message;
+  } catch (error) {
+    toast.error(error.message);
+    if(error.message === "You are not authorized to access this route"){
+      thunkAPI.dispatch(logoutUser());
+    }
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+export const updateCampaign = createAsyncThunk('admin/update-campaign', async (data=null, thunkAPI) => {
+  try {
+    const response = await adminService.updateCampaign(JSON.stringify(data));
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+    thunkAPI.dispatch(addCampaign(data))
+    toast.success(result.message)
+    return result.message;
+  } catch (error) {
+    toast.error(error.message);
+    if(error.message === "You are not authorized to access this route"){
+      thunkAPI.dispatch(logoutUser());
+    }
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
   export const adminSlice = createSlice({
     name: "admin",
@@ -220,6 +278,33 @@ export const deleteBanner = createAsyncThunk('admin/delete-banner', async (id, t
           state.isLoading = false
         })
         .addCase(deleteBanner.rejected, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(addRecommendedProduct.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(addRecommendedProduct.fulfilled, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(addRecommendedProduct.rejected, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(deleteRecommendedProduct.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(deleteRecommendedProduct.fulfilled, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(deleteRecommendedProduct.rejected, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(updateCampaign.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(updateCampaign.fulfilled, (state,action) => {
+          state.isLoading = false
+        })
+        .addCase(updateCampaign.rejected, (state,action) => {
           state.isLoading = false
         })
     }

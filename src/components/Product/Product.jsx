@@ -11,6 +11,8 @@ const productCardVariants = {
 };
 
 export default function Product({ product }) {
+  const currentDate = new Date().toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' });
+  const campaignDate = new Date(product.campaign?.endDate) > currentDate
   return (
     <motion.div
       initial="hidden"
@@ -19,7 +21,7 @@ export default function Product({ product }) {
       transition={{ duration: 0.5 }}
     >
       <Link to={`/product?id=${product._id}`} className={`${styles["productComp"]} ${product.stock === 0 ? styles['soldOut'] : ''}`}>
-        {(product.campaign?.endDate) > new Date() && <p className={styles["campaign"]}>%{product.campaign.discountPercentage}</p>}
+        {campaignDate && <p className={styles["campaign"]}>%{product.campaign.discountPercentage}</p>}
         <div className={`${styles['product-img-container']} ${product.stock === 0 ? styles['sold-out'] : ''}`}>
           <img className={styles["productImg"]} src={`${product?.images[0]}`} alt="product" />
         </div>
@@ -71,7 +73,7 @@ export default function Product({ product }) {
         <span className={styles["brand"]}>{product.brand}</span>
         <div className={styles["product-infos"]}>
           <h2 className={styles["product-name"]}>{product.name}</h2>
-          {new Date(product.campaign?.endDate) > new Date() ? (
+          {campaignDate ? (
             <p className={styles["campaign-price"]}>
               <p className={styles["old-price"]}>{formatPrice(product.price)} TL</p>
               {formatPrice((product.price - (product.price * product.campaign.discountPercentage) / 100).toFixed(2))} TL

@@ -14,7 +14,6 @@ export default function Slider({products, text}) {
       behavior: 'smooth',
     });
   };
-
   const handleScrollRight = () => {
     const container = containerRef.current;
     container.scrollBy({
@@ -44,7 +43,7 @@ export default function Slider({products, text}) {
     )
   }
 
-  if(products.length < 5) {
+  if(products?.length < 5) {
     return null;
   }
   return (
@@ -53,15 +52,10 @@ export default function Slider({products, text}) {
         <div className={styles["recommended"]} ref={containerRef}>
           <div className={styles["recommended-products"]} ref={containerRef}>
             {
-              isLoading ? (
-                Array.from({ length: 10 }).map((_, index) => (
-                  <SkeletonCard key={index} />
-                ))
-              ) : (
-                products?.map((product) => (
-                  <Product key={product._id} product={product} />
-                ))
-              )
+                products?.map((product) => 
+                  product && <Product key={product?._id} product={product} />
+                )                
+              
             }
 
           </div>

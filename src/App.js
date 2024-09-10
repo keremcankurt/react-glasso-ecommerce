@@ -15,15 +15,24 @@ import Banner from './pages/AdminPanel/AdManagement/Banner/Banner';
 import Products from './pages/AdminPanel/Products/Products';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getBanners, getProducts, getPromotionalMessages } from './features/product/productSlice';
 
+import { 
+  getBanners,
+  getProducts,
+  getPromotionalMessages,
+  getRecommendedProducts,
+} from './features/product/productSlice';
+import AddCampaign from './pages/AdminPanel/AddCampaign/AddCampaign';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getProducts())
+    dispatch(getRecommendedProducts())
     dispatch(getBanners())
     dispatch(getPromotionalMessages())
   }, [dispatch]);
+
+  
 
   return (
     <>
@@ -34,6 +43,7 @@ function App() {
 
         <Route path='/admin' element={<AdminLayout />}>
           <Route path='add-product' element={<AddProduct />}/>
+          <Route path='add-campaign' element={<AddCampaign />}/>
           <Route path='promotional-messages' element={<PromotionalMessages />}/>
           <Route path='banner' element={<Banner />}/>
           <Route path='products' element={<Products />}/>
