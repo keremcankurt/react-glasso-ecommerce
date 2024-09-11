@@ -256,6 +256,10 @@
                 color: #fff;
                 border: none;
                 cursor: pointer;
+                &:disabled {
+                  background-color: gray;
+                  cursor: not-allowed;
+                }
                 @media screen and (max-width: 768px) {
                   font-size: 12px;
                   padding: 5px 8px;
@@ -265,19 +269,5 @@
       }
   }
   
-  .invalid{
-    font-size: 14px;
-    color: #888;
-    border: 1px solid #888;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #f3e3e2;
-    text-align: center;
-    margin-left: 5px;
-    @media screen and (max-width: 768px) {
-      font-size: 12px !important;
-      margin: 0;
-    }
-  }
   
   

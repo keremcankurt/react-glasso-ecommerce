@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   message: "",
   user: null,
+  cart: []
 };
 export const profile = createAsyncThunk('user/profile', async (data=null, thunkAPI) => {
   try {
@@ -37,6 +38,18 @@ export const favProduct = createAsyncThunk('user/fav', async (id,thunkAPI) => {
       return thunkAPI.rejectWithValue(error.message);
   }
 });
+export const getCart = createAsyncThunk('user/cart', async (cart,thunkAPI) => {
+  try {
+    const response = await userService.getCart(JSON.stringify(cart));
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+    return result;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+    }
+});
   export const userSlice = createSlice({
     name: "user",
     initialState,
@@ -58,7 +71,54 @@ export const favProduct = createAsyncThunk('user/fav', async (id,thunkAPI) => {
         state.user = action.payload
         state.isSuccess = true
         state.isError = false
-      }
+      },
+      addCart: (state,action) => {
+        state.cart.push(action.payload);
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push({[action.payload._id]: action.payload.quantity })
+        localStorage.setItem("cart", JSON.stringify(cart));
+      },
+      decreaseQuantityOrder: (state, action) => {
+        const updatedCart = state.cart.map((item) =>
+          item._id === action.payload && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        );
+      
+        const updatedCartIds = updatedCart.map((item) => ({
+          [item._id]: item.quantity
+        }));
+      
+        localStorage.setItem('cart', JSON.stringify(updatedCartIds));
+      
+        state.cart = updatedCart;
+      },
+      increaseQuantityOrder: (state, action) => {
+        const updatedCart = state.cart.map((item) =>
+          item._id === action.payload && item.quantity < ((item.stock > 5) ? 5 : item.stock)
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      
+        const updatedCartIds = updatedCart.map((item) => ({
+          [item._id]: item.quantity
+        }));
+      
+        localStorage.removeItem('cart');
+        localStorage.setItem('cart', JSON.stringify(updatedCartIds));
+      
+        state.cart = updatedCart;
+      },
+      deleteOrder: (state,action) => {
+        const updatedCart = state.cart.filter((item) => item._id !== action.payload);
+        state.cart = updatedCart;
+        const cart = state.cart.map(item => ({
+          [item._id]: item.quantity
+        }));
+        localStorage.removeItem(cart)
+        localStorage.setItem('cart', JSON.stringify(cart))
+        
+      },
     },
     extraReducers: (builder) => {
         builder
@@ -87,10 +147,26 @@ export const favProduct = createAsyncThunk('user/fav', async (id,thunkAPI) => {
             state.user.favProducts.push(productId);
           }
         })
+        .addCase(getCart.fulfilled, (state,action) => {
+          state.cart = action.payload
+          const cart = action.payload.map(item => ({
+            [item._id]: item.quantity
+          }));
+          localStorage.removeItem(cart)
+          localStorage.setItem('cart', JSON.stringify(cart))
+        })
         
     }
 
 });
 
-export const { reset, logoutUser, loginUser } = userSlice.actions;
+export const { 
+  reset,
+  logoutUser,
+  loginUser,
+  addCart,
+  decreaseQuantityOrder,
+  deleteOrder,
+  increaseQuantityOrder
+ } = userSlice.actions;
 export default userSlice.reducer;

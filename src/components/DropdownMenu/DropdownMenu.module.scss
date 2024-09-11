@@ -1,0 +1,114 @@
+.settings {
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white !important;
+    margin-right: 5px;
+  
+    .profile-picture {
+      overflow: hidden;
+      width: 100%;
+      border-radius: 50%;
+    }
+  
+    // Tablet ve daha küçük ekranlar
+    @media screen and (max-width: 768px) {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+  
+      .profile-picture {
+        width: 80%; // Profil fotoğrafının genişliğini yüzde olarak ayarladık
+        height: 80%;
+      }
+    }
+  
+    // Mobil ekranlar
+    @media screen and (max-width: 480px) {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+  
+      .profile-picture {
+        width: 70%;
+        height: 70%;
+      }
+    }
+  }
+  
+  .settings:hover {
+    color: #666;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    z-index: 99999;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s, transform 0.3s ease;
+  
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: 0s, 0s, 0.3s;
+    }
+  
+    .dropdown-menu-header {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      font-weight: bold;
+  
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
+  
+      @media screen and (max-width: 480px) {
+        font-size: 12px;
+      }
+    }
+  
+    .dropdown-menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+  
+      li {
+        margin-bottom: 8px;
+  
+        a {
+          color: #333;
+          text-decoration: none;
+          display: block;
+          padding: 4px;
+          border-radius: 4px;
+  
+          @media screen and (max-width: 768px) {
+            font-size: 12px;
+          }
+  
+          @media screen and (max-width: 480px) {
+            font-size: 10px;
+          }
+  
+          &:hover {
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+  

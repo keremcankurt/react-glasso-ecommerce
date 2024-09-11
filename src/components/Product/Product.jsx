@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import styles from './Product.module.scss';
 import { formatPrice } from '../../utils/product';
 import { useDispatch, useSelector } from 'react-redux';
-import { favProduct } from '../../features/user/userSlice';
+import { addCart, decreaseQuantityOrder, favProduct, increaseQuantityOrder } from '../../features/user/userSlice';
 
 const productCardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -16,8 +16,8 @@ export default function Product({ product }) {
   const currentDate = new Date();
   const campaignDate = new Date(product.campaign?.endDate) > currentDate
   const [isFavorited, setIsFavorited] = useState(false);
-  const { user } = useSelector((state) => state.user)
-
+  const { user, cart } = useSelector((state) => state.user)
+  const productQuantity = cart.filter((item) => item._id === product._id)[0]?.quantity;
   useEffect(() => {
     if (user?.favProducts && product) {
       const isProductFavorited = user.favProducts.some((id) => id === product._id);
@@ -30,6 +30,23 @@ export default function Product({ product }) {
     e.preventDefault();
     setIsFavorited((prevValue) => !prevValue);
     dispatch(favProduct(product._id));
+  };
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const selectedProduct = {
+      ...product,
+      quantity: 1,
+    };
+    dispatch(addCart(selectedProduct));
+  };
+  const decreaseQuantity = (e, productId) => {
+    e.preventDefault();
+    dispatch(decreaseQuantityOrder(productId));
+  };
+
+  const increaseQuantity = (e, productId) => {
+    e.preventDefault();
+    dispatch(increaseQuantityOrder(productId));
   };
   return (
     <motion.div
@@ -108,10 +125,18 @@ export default function Product({ product }) {
                 </button>
               )}
             {product.stock !== 0 && (
-              <>
-                <button className={styles["add-to-cart"]}>
-                  Sepete Ekle
-                </button>
+                <>
+                {cart.some((item) => item._id === product._id) ? (
+                  <div className={styles["product-buttons"]}>
+                    <button onClick={(e) => decreaseQuantity(e, product._id)} disabled={productQuantity === 1}>-</button>
+                    <span className={styles["quantity"]}>{productQuantity}</span>
+                    <button onClick={(e) => increaseQuantity(e, product._id)} disabled={productQuantity === product?.stock}>+</button>
+                  </div>
+                ) : (
+                  <button className={styles["add-to-cart"]} onClick={handleAddToCart}>
+                    Sepete Ekle
+                  </button>
+                )}
               </>
             )}
           </div>

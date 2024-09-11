@@ -1,13 +1,14 @@
-import {get, put} from '../request';
+import {get, post, put} from '../request';
 const BASE_URL = "http://192.168.1.109:4000/api/user";
 
 const getProfile = () =>  get(`${BASE_URL}/profile`);
 const favProduct = (id) =>  put(`${BASE_URL}/${id}/fav`);
-
+const getCart = cart => post(`${BASE_URL}/cart`,cart,'application/json');
 
 const userService = {
     getProfile,
     favProduct,
+    getCart
 }
 
 export default userService;
