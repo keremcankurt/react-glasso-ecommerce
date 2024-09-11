@@ -1,5 +1,5 @@
 import {get, post, put} from '../request';
-const BASE_URL = "http://192.168.1.109:4000/api/user";
+const BASE_URL = "https://glasso-ecommerce-backend.onrender.com/api/user";
 
 const getProfile = () =>  get(`${BASE_URL}/profile`);
 const favProduct = (id) =>  put(`${BASE_URL}/${id}/fav`);

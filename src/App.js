@@ -24,6 +24,8 @@ import {
 } from './features/product/productSlice';
 import AddCampaign from './pages/AdminPanel/AddCampaign/AddCampaign';
 import { profile } from './features/user/userSlice';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -41,6 +43,9 @@ function App() {
 
       <Routes>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path='/forgot-password/change/' element={<ForgotPassword/>}/>
+        <Route path='/confirmaccount' element={<ConfirmAccount/>}/>
         <Route path='/register' element={<Register/>}/>
 
         <Route path='/admin' element={<AdminLayout />}>

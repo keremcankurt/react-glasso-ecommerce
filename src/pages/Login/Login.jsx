@@ -40,7 +40,7 @@ export default function Login() {
               <input placeholder='E-mail' type='email' required value={email} onChange={(e) => setEmail(e.target.value)}/>
               <input placeholder='Şifre' type='password' required value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <Link className={styles.forgotPassword} to="/forgotpassword">Şifremi Unuttum</Link>
+            <Link className={styles.forgotPassword} to="/forgot-password">Şifremi Unuttum</Link>
             <button className={styles.loginButton} type='submit' disabled={isLoading}>
               {!isLoading ? 'Giriş Yap' : (
               <div className={styles.spinner}></div>

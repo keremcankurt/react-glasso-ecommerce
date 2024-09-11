@@ -3,7 +3,6 @@ import Slider from '../../components/Slider/Slider';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import styles from './Product.module.scss'
-import { useSelector } from 'react-redux';
 import { FaHeart } from 'react-icons/fa';
 
 export default function Product() {
@@ -14,9 +13,6 @@ export default function Product() {
     const [quantity, setQuantity] = useState(1);
     const [sortOption, setSortOption] = useState("newest");
 
-    const {user} = useSelector(
-      (state) => state.user
-    );
     const handleSortChange = (event) => {
       setSortOption(event.target.value);
     };

@@ -20,7 +20,7 @@ export default function Product({ product }) {
   const productQuantity = cart.filter((item) => item._id === product._id)[0]?.quantity;
   useEffect(() => {
     if (user?.favProducts && product) {
-      const isProductFavorited = user.favProducts.some((id) => id === product._id);
+      const isProductFavorited = user?.favProducts?.some((id) => id === product?._id);
       setIsFavorited(isProductFavorited);
     }
   }, [user, product]);

@@ -17,8 +17,10 @@ export const profile = createAsyncThunk('user/profile', async (data=null, thunkA
     if (!response.ok) {
       throw new Error(result.message);
     }
+    console.log(result)
     return result.user;
   } catch (error) {
+    console.log(error)
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -136,9 +138,13 @@ export const getCart = createAsyncThunk('user/cart', async (cart,thunkAPI) => {
         })
         .addCase(favProduct.fulfilled, (state, action) => {
           const productId = action.payload;
-        
+          console.log(productId)
+          if (!state.user.favProducts) {
+            state.user.favProducts = [];
+          }
+        console.log(state.user.favProducts)
           const isFavorited = state.user.favProducts.includes(productId);
-        
+          console.log(state.user.favProducts)
           if (isFavorited) {
             state.user.favProducts = state.user.favProducts.filter(
               (id) => id !== productId
@@ -146,7 +152,7 @@ export const getCart = createAsyncThunk('user/cart', async (cart,thunkAPI) => {
           } else {
             state.user.favProducts.push(productId);
           }
-        })
+        })        
         .addCase(getCart.fulfilled, (state,action) => {
           state.cart = action.payload
           const cart = action.payload.map(item => ({
