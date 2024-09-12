@@ -1,7 +1,7 @@
 import {del, post, put} from '../request';
 
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL ?process.env.REACT_APP_API_BASE_URL + "/api/admin" : "https://glasso-ecommerce-backend.onrender.com/api/admin";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL + "/api/admin";
 
 const addProduct = (data) =>  post(`${BASE_URL}/add-product`,data, 'application/json');
 const deleteProduct = (id) =>  del(`${BASE_URL}/delete-product/${id}`);
