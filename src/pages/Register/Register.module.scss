@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Combo&family=Open+Sans:ital,wght@0,700;1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Combo&family=Open+Sans:ital,wght@0,700;1,300&family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@200..700&display=swap');
-.registerContainer{
+
+.registerContainer {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -13,31 +14,34 @@
     background-position: center;
     background-repeat: no-repeat;
     &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: inherit;
-      background-size: inherit;
-      background-position: inherit;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: inherit;
+        background-size: inherit;
+        background-position: inherit;
     }
 
-    .registerContent{
+    .registerContent {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         border: 1px solid rgba(95, 91, 91, 0.597);
         border-radius: 40px;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-                    0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
         padding: 10px 20px;
         overflow: hidden;
         background-color: rgba(3, 3, 3, 0.8);
         text-align: center;
-        .registerLogo{
+        max-width: 400px;
+        width: 90%;
+
+        .registerLogo {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -48,29 +52,32 @@
                 font-size: 45px;
                 margin-bottom: 5px;
             }
-            
-              h2 {
+            h2 {
                 color: #ff5722;
                 font-size: 25px;
                 margin-top: 0;
-             }
+            }
         }
-        .registerMainContent{
-            width: 370px;
+
+        .registerMainContent {
+            width: 100%;
             display: flex;
             flex-direction: column;
 
-            .registerInputs{
+            .registerInputs {
                 display: flex;
                 flex-direction: column;
-                .fullName{
-                  display: flex;
-                  flex: 1;
-                  gap: 5px;
-                  input{
-                    width: 50%;
-                  }
+
+                .fullName {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 5px;
+
+                    input {
+                        width: 100%;
+                    }
                 }
+
                 input {
                     padding: 10px;
                     margin-bottom: 10px;
@@ -78,10 +85,9 @@
                     border-radius: 5px;
                     font-size: 16px;
                 }
-                
-
             }
-              .registerButton {
+
+            .registerButton {
                 padding: 10px 20px;
                 background-color: #ff5722;
                 color: white;
@@ -93,85 +99,134 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-            
-                &:disabled, &:hover{
-                  background-color: #ffffff;
-                  border: 1px solid #ff5722;
-                  color: #ff5722;
+
+                &:disabled,
+                &:hover {
+                    background-color: #ffffff;
+                    border: 1px solid #ff5722;
+                    color: #ff5722;
                 }
+
                 .spinner {
-                  border: 4px solid rgba(0, 0, 0, 0.1);
-                  border-left-color: #ff5722;
-                  border-radius: 50%;
-                  width: 24px;
-                  height: 24px;
-                  animation: spin 1s linear infinite;
+                    border: 4px solid rgba(0, 0, 0, 0.1);
+                    border-left-color: #ff5722;
+                    border-radius: 50%;
+                    width: 24px;
+                    height: 24px;
+                    animation: spin 1s linear infinite;
                 }
-                
+
                 @keyframes spin {
-                  0% {
-                    transform: rotate(0deg);
-                  }
-                  100% {
-                    transform: rotate(360deg);
-                  }
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
                 }
             }
+
             .googleButton {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background-color: white;
-              color: rgb(112, 112, 112);
-              border: 1px solid gray;
-              padding: 10px;
-              cursor: pointer;
-              font-size: 14px;
-              border-radius: 5px;
-              margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
+                color: rgb(112, 112, 112);
+                border: 1px solid gray;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 5px;
+                margin-bottom: 10px;
             }
-            
+
             .googleButton:hover {
-              background-color: #f5f3f3;
+                background-color: #f5f3f3;
             }
+
             .hasNotAccount {
                 font-size: 14px;
                 color: white;
-            
+
                 a {
-                  color: #ff5722;
-                  text-decoration: none;
+                    color: #ff5722;
+                    text-decoration: none;
                 }
-              }
+            }
         }
     }
 }
 
 .checkboxes {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  color: white;
-
-  .checkboxItem {
     display: flex;
-    margin-bottom: 10px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: white;
 
-    input[type='checkbox'] {
-      margin-right: 10px;
+    .checkboxItem {
+        display: flex;
+        margin-bottom: 10px;
+
+        input[type='checkbox'] {
+            margin-right: 10px;
+        }
+
+        label {
+            font-family: "Libre Baskerville", serif;
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: justify;
+            a {
+                color: white;
+                font-weight: bold;
+                font-size: 13px;
+            }
+        }
     }
+}
 
-    label {
-      font-family: "Libre Baskerville", serif;
-      font-size: 12px;
-      line-height: 1.5;
-      text-align: justify;
-      a{
-        color: white;
-        font-weight: bold;
-        font-size: 13px;
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .registerContent {
+        padding: 20px;
+        width: 90%;
+        max-width: 500px;
+        .registerLogo h1 {
+            font-size: 35px;
+        }
+        .registerLogo h2 {
+            font-size: 20px;
+        }
+        .fullName{
+          input{
+            width: 94% !important;
+          }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .registerContent {
+        padding: 15px;
+        max-width: 350px;
+    }
+    .registerLogo h1 {
+        font-size: 28px;
+    }
+    .registerLogo h2 {
+        font-size: 18px;
+    }
+    .registerButton {
+        font-size: 14px;
+    }
+    .googleButton {
+        font-size: 12px;
+        padding: 8px;
+    }
+    .fullName{
+      input{
+        width: 90% !important;
       }
     }
-  }
 }

@@ -1,5 +1,5 @@
 import {get, post, put} from '../request';
-const BASE_URL = "https://glasso-ecommerce-backend.onrender.com/api/auth";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL ?process.env.REACT_APP_API_BASE_URL + "/api/auth" : "https://glasso-ecommerce-backend.onrender.com/api/auth";
 
 const login = (data) =>  post(`${BASE_URL}/login`,data, 'application/json');
 const logout = () =>  get(`${BASE_URL}/logout`);

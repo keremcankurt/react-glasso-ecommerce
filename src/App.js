@@ -26,6 +26,7 @@ import AddCampaign from './pages/AdminPanel/AddCampaign/AddCampaign';
 import { profile } from './features/user/userSlice';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
+import OrderPage from './pages/order/Order';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -59,6 +60,7 @@ function App() {
         <Route path='/' element={<HomeLayout/>}>
           <Route index={true} element={<HomePage/>}/>
           <Route path='product' element={<Product/>}/>
+          <Route path='order' element={<OrderPage/>}/>
         </Route>
 
       </Routes>

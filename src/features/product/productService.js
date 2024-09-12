@@ -1,5 +1,5 @@
 import {get} from '../request';
-const BASE_URL = "https://glasso-ecommerce-backend.onrender.com/api/product";
+const BASE_URL = process.env.REACT_APP_API_BASE_URL ?process.env.REACT_APP_API_BASE_URL + "/api/product" : "https://glasso-ecommerce-backend.onrender.com/api/product";
 
 const getProducts = () =>  get(`${BASE_URL}/`);
 const getPromotionalMessages = () =>  get(`${BASE_URL}/messages`);

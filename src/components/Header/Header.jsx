@@ -60,7 +60,7 @@ export default function Header() {
         ) : (
           <>
             <Link className={styles.logo} to="/">
-              DSK-TİCARET <GiSunglasses size={50} className={styles.glasses} />
+              DSK-TİCARET <GiSunglasses className={styles.glasses} />
             </Link>
             {!isMobile && (
               <div className={styles.searchBar}>
@@ -81,8 +81,7 @@ export default function Header() {
                 </button>}
                { user ? <DropDownMenu />:
                 <p>
-                  <Link to='/login'>Giriş Yap</Link>&nbsp;|&nbsp;
-                  <Link to='/register'>Kayıt Ol</Link>
+                  <Link to='/login' className={styles.loginButton}>Giriş Yap</Link>
                 </p>}
               </div>
           </>

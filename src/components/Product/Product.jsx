@@ -110,7 +110,7 @@ export default function Product({ product }) {
           <h2 className={styles["product-name"]}>{product.name}</h2>
           {campaignDate ? (
             <p className={styles["campaign-price"]}>
-              <p className={styles["old-price"]}>{formatPrice(product.price)} TL</p>
+              <span className={styles["old-price"]}>{formatPrice(product.price)} TL</span>
               {formatPrice((product.price - (product.price * product.campaign.discountPercentage) / 100).toFixed(2))} TL
             </p>
           ) : (
