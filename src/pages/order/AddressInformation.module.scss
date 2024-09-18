@@ -1,0 +1,96 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+  
+    .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      .inputsGroup {
+        display: flex;
+        flex-direction: row;  // Değişiklik
+        gap: 10px;
+        flex-wrap: wrap;      // Satır kaydırmasını sağlamak için
+  
+        .input, .react-select {
+          flex: 1;            // Alanları eşit şekilde genişletir
+          min-width: 200px;  // Minimum genişlik sağlar
+        }
+      }
+    }
+  }
+  
+  .input, .textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  
+    &:focus {
+      border-color: #0056b3;
+      outline: none;
+    }
+  }
+  
+  .textarea {
+    height: 120px;
+    resize: none;
+  }
+  
+  .react-select {
+    width: 100%;  // Genişliği tam olarak ayarlamak için
+  
+    .react-select__control {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: none;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      min-height: 40px; // Yükseklik ekledik
+  
+      &:hover {
+        border-color: #0056b3;
+      }
+    }
+  
+    .react-select__menu {
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .react-select__option {
+      font-size: 16px;
+    }
+  }
+  
+  // Responsive Design
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+  
+      .inputsContainer {
+        .inputsGroup {
+          flex-direction: column;  // Küçük ekranlarda dikey düzenleme
+          gap: 8px;
+        }
+      }
+  
+      .input, .textarea {
+        font-size: 14px;
+      }
+  
+      .react-select {
+        .react-select__control {
+          font-size: 14px;
+        }
+  
+        .react-select__option {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  

@@ -17,24 +17,24 @@
   align-items: center;
   font-family: 'Oswald', sans-serif;
   background: #f6f5f7;
+  .confirmAccount-message{
+      font-size: 29px;
+      font-weight: 500;
+      padding: 10px;
+  }
+  .confirmAccountToLogin{
+      font-size: 27px;
+      font-weight: 500;
+      text-decoration: none;
+  }
+  .confirmAccountToLogin:visited{
+      color: darkgray;
+  }
+  .confirmAccountToLogin:hover{
+      opacity: 0.8;
+  }
 }
 
-.confirmAccount-message{
-    font-size: 29px;
-    font-weight: 500;
-    padding: 10px;
-}
-.confirmAccountToLogin{
-    font-size: 27px;
-    font-weight: 500;
-    text-decoration: none;
-}
-.confirmAccountToLogin:visited{
-    color: darkgray;
-}
-.confirmAccountToLogin:hover{
-    opacity: 0.8;
-}
 
 /*responsive */
 
@@ -46,11 +46,5 @@
 @media (max-height: 600px) {
   .confirmAccount-container{
     height: 65%;
-  }
-  .confirmAccount-message{
-    a{
-        font-size: 16px;
-    }
-    font-size: 16px;
   }
 }

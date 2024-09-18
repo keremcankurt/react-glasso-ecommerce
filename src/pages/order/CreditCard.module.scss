@@ -1,0 +1,93 @@
+.container {
+    padding: 10px 50px;
+  
+    @media (max-width: 768px) {
+      padding: 15px;
+    }
+  
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+  
+      .inputGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+  
+        label {
+          font-size: 14px;
+          color: #333;
+          font-weight: 600;
+        }
+  
+        input {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 16px;
+          outline: none;
+  
+          &:focus {
+            border-color: #007bff;
+          }
+        }
+      }
+  
+      .multiGroup {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+  
+        .expirationDate {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+  
+          .selectGroup {
+            display: flex;
+            gap: 10px;
+  
+            .react-select__control {
+              width: 100px;
+              border-radius: 5px;
+            }
+          }
+        }
+        input[type='password'] {
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 2px;
+            display: flex;
+            flex-direction: column;
+            width: 100px; /* Sabit genişlikten esnek genişliğe geçiyoruz */
+            flex-shrink: 0; /* Ekran küçüldüğünde bile küçülebilir */
+            
+            @media (max-width: 480px) {
+              width: 80px; /* Küçük ekranlarda daha da küçült */
+            }
+        
+            label {
+              font-size: 14px;
+              color: #333;
+              font-weight: 600;
+            }
+        
+            input {
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 16px;
+              outline: none;
+        
+              &:focus {
+                border-color: #007bff;
+              }
+            }
+          }
+      }
+    }
+  }
+  
+ 
+  
