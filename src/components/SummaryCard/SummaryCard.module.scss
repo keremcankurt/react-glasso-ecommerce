@@ -1,0 +1,39 @@
+.summaryCard {
+    background: #ffffff; /* Card background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the card */
+    display: flex; /* Flexbox layout for alignment */
+    justify-content: space-between; /* Space between title/value and icon */
+    align-items: center; /* Center items vertically */
+    
+    transition: transform 0.2s; /* Smooth hover effect */
+  
+    &:hover {
+      transform: translateY(-5px); /* Lift effect on hover */
+    }
+  
+    .info {
+      display: flex; /* Flexbox layout for title/value */
+      flex-direction: column; /* Stack title and value */
+  
+      .title {
+        font-size: 16px; /* Font size for the title */
+        color: #333; /* Dark text color */
+        margin: 0; /* Remove default margin */
+      }
+  
+      .value {
+        font-size: 20px; /* Font size for the value */
+        font-weight: bold; /* Bold weight for emphasis */
+        color: #2ecc71; /* Green color for value */
+        margin-top: 4px; /* Space above the value */
+      }
+    }
+  
+    .icon {
+      font-size: 24px; /* Adjust size based on your needs */
+      color: #2ecc71; /* Match the color theme */
+    }
+  }
+  

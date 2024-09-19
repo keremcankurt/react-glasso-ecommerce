@@ -27,6 +27,7 @@ import { profile } from './features/user/userSlice';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
 import OrderPage from './pages/order/Order';
+import Dashboard from './pages/AdminPanel/Dashboard/Dashboard';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
 
         <Route path='/admin' element={<AdminLayout />}>
+          <Route index={true} element= {<Dashboard/>}/>
           <Route path='add-product' element={<AddProduct />}/>
           <Route path='add-campaign' element={<AddCampaign />}/>
           <Route path='promotional-messages' element={<PromotionalMessages />}/>
