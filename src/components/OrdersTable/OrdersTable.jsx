@@ -2,7 +2,7 @@ import React from 'react';
 import OrderRow from './OrderRow';
 import styles from './OrdersTable.module.scss';
 
-const OrdersTable = ({ orders }) => {
+const OrdersTable = ({ orders, handleDeliverOrder, handleShipOrder }) => {
   return (
     <div className={styles.ordersTable}>
       <h3>Siparişler</h3>
@@ -17,7 +17,9 @@ const OrdersTable = ({ orders }) => {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <OrderRow key={order.id} order={order} />
+            <OrderRow key={order.id} order={order}
+            handleDeliverOrder={handleDeliverOrder}
+            handleShipOrder={handleShipOrder}/>
           ))}
         </tbody>
       </table>

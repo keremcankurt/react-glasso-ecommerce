@@ -10,30 +10,35 @@
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
+        font-size: 12px;
     }
     .paymentFailure{
         background-color: #FF0000;
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
+        font-size: 12px;
     }
     .preparing{
         background-color: #0000FF;
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
+        font-size: 12px;
     }
     .shipping{
         background-color: #800080;
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
+        font-size: 12px;
     }
     .delivered{
         background-color: #008000;
         color: white;
         padding: 4px 8px;
         border-radius: 10px;
+        font-size: 12px;
     }
     .detailsButton{
         background: transparent;
@@ -66,18 +71,23 @@
       padding: 0;
   
       li {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr 1fr; 
         margin: 5px 0;
         padding: 10px;
         border: 1px solid #e0e0e0;
         border-radius: 5px;
-        background-color: #fff; /* White background for products */
+        background-color: #fff;
         
         img {
           width: 50px; /* Adjust size as needed */
           height: auto;
+        }
+        span{
+          &:last-child{
+            text-align: end;
+          }
+
         }
       }
     }

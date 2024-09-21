@@ -1,4 +1,4 @@
-import {del, post, put} from '../request';
+import {del, post, put, get} from '../request';
 
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL + "/api/admin";
@@ -18,6 +18,11 @@ const addRecommendedProduct = (id) =>  post(`${BASE_URL}/add-recommended-product
 const deleteRecommendedProduct = (id) =>  del(`${BASE_URL}/delete-recommended-product/${id}`);
 
 const updateCampaign = (data) =>  put(`${BASE_URL}/update-campaign`,data, 'application/json');
+
+export const shipOrder = (data) =>  put(`${BASE_URL}/ship-order`,data, 'application/json');
+export const deliverOrder = (id) =>  put(`${BASE_URL}/deliver-order/${id}`);
+
+export const getDashboardDatas = () =>  get(`${BASE_URL}/dashboard`);
 
 const adminService = {
     addBanner,

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './OrderRow.module.scss';
 import { FaInfoCircle } from 'react-icons/fa';
 
-const OrderRow = ({ order }) => {
+const OrderRow = ({ order, handleShipOrder, handleDeliverOrder }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({
     shippingCompany: order.cargo.shippingCompany || '',
@@ -18,11 +18,6 @@ const OrderRow = ({ order }) => {
     const { name, value } = e.target;
     setShippingInfo({ ...shippingInfo, [name]: value });
   };
-
-  const handleShipOrder = () => {
-    console.log('Order shipped with', shippingInfo);
-  };
-
   const statusClassName = (status) => {
     switch (status) {
         case "Ödeme Beklemede":
@@ -64,7 +59,8 @@ const OrderRow = ({ order }) => {
                   <li key={product._id} className={styles.product}>
                     <img src={product.image} alt={product.name} />
                     <span>{product.name}</span>
-                    <span>{product.price}₺</span>
+                    <span>{product.quantity || 1} adet</span>
+                    <span>{product.price * product.quantity}₺</span>
                   </li>
                 ))}
               </ul>
@@ -101,7 +97,10 @@ const OrderRow = ({ order }) => {
                   />
                   <button 
                     className={styles.shipButton} 
-                    onClick={handleShipOrder} 
+                    onClick={() => handleShipOrder({
+                      orderId: order._id,
+                      ...shippingInfo
+                    })} 
                     disabled={!shippingInfo.shippingCompany || !shippingInfo.trackingNumber}>
                     Kargoya Ver
                   </button>
@@ -110,7 +109,7 @@ const OrderRow = ({ order }) => {
               {
                 order.status === "Kargoya Verildi" &&
                 <div>
-                    <button className={styles.deliveredButton}>Teslim Et</button>
+                    <button className={styles.deliveredButton} onClick={() => handleDeliverOrder(order._id)}>Teslim Et</button>
                 </div>
               }
             </div>

@@ -20,7 +20,6 @@ export default function Products() {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const dispatch = useDispatch();
-    console.log(products)
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);

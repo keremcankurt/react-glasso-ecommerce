@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getProducts } from '../../features/product/productSlice';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { payment } from '../../features/payment/paymentService';
-import { getCart } from '../../features/user/userSlice';
+import { payment, paymentIyzico } from '../../features/payment/paymentService';
+import { getCart, resetCart } from '../../features/user/userSlice';
 import Products from './Products';
 import Summary from './Summary';
 import Empty from './Empty';
@@ -48,7 +48,7 @@ const OrderPage = () => {
 
   useEffect(() => {
     if(paymentStatus === "SUCCESS"){
-      localStorage.removeItem("cart")
+      dispatch(resetCart())
       dispatch(getCart([]))
       
     }
@@ -70,16 +70,45 @@ const OrderPage = () => {
       cardInfo,
     };
 
-    if (user && ((currentPhase === 2 && iyzicoPayment) || (currentPhase === 3 && !iyzicoPayment))) {
+    if (user) {
       try {
         setPaymentLoading(true);
-        const response = await payment(JSON.stringify(data));
+        let response;
+        if(((currentPhase === 2 && iyzicoPayment)))
+          response = await paymentIyzico(JSON.stringify(data));
+        else
+        {
+          response = await payment(JSON.stringify(data));
+        }
         const result = await response.json();
-        console.log(result);
-        if (!response.ok || result.status !== 'success') {
+        if (!response.ok) {
           throw new Error(result.message);
         }
-        window.location.href = result.paymentPageUrl;
+        if(((currentPhase === 2 && iyzicoPayment)))
+          window.location.href = result.paymentPageUrl;
+        else {
+          toast.success(result.message)
+          setAddress({
+            name: '',
+            surname: '',
+            phone: '',
+            city: '',
+            district: '',
+            town: '',
+            addressDesc: '',
+          });
+          
+          setCardInfo({
+            cardNumber: '',
+            expirationMonth: '',
+            expirationYear: '',
+            cvv: '',
+            cardHolderName: ''
+          });
+          dispatch(getProducts())
+          dispatch(resetCart())
+        }
+
       } catch (error) {
         toast.error(error.message);
       } finally {
