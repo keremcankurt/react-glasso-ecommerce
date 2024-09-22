@@ -1,0 +1,44 @@
+.favoriteContainer{
+    margin-top: 110px;
+    min-height: 40vh;
+    display: grid;
+    header {
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 30px;
+        color: gray;
+        input{
+            padding: 10px;
+            border-radius: 10px;
+            width: 20%;
+            border: 1px double gray;
+            outline: none;
+            font-size: 1rem;
+        }
+        @media (max-width: 728px) {
+            h2, input{
+                font-size: 12px !important;
+            }
+            input{
+                width: 35%;
+            }
+        }
+        
+    }
+    main{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+        @media (max-width: 728px) {
+            gap: 10px;
+            padding: 5px;
+        }
+    }
+}
