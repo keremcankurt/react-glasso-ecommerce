@@ -60,7 +60,7 @@ export default function Product({ product }) {
         <div className={`${styles['product-img-container']} ${product.stock === 0 ? styles['sold-out'] : ''}`}>
           <img className={styles["productImg"]} src={`${product?.images[0]}`} alt="product" />
         </div>
-        <div className={styles["product-reviews"]}>
+        {/* <div className={styles["product-reviews"]}>
           <p className={styles["stars"]}>
             <span className={styles["star"]}>
               <span
@@ -104,7 +104,7 @@ export default function Product({ product }) {
             </span>
             ({product.comments.length})
           </p>
-        </div>
+        </div> */}
         <span className={styles["brand"]}>{product.brand}</span>
         <div className={styles["product-infos"]}>
           <h2 className={styles["product-name"]}>{product.name}</h2>

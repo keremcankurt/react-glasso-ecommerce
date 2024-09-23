@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.scss';
 import { Link } from 'react-router-dom';
-import { FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,22 +50,26 @@ export default function Footer() {
           <div className={styles.contentGroup}>
             <h2>Kurumsal</h2>
             <div className={styles.contentItems}>
-              <Link to='/about' className={styles.contentItem}>Hakkımızda</Link>
-              <Link to='/contact' className={styles.contentItem}>İletişim</Link>
+              <Link to='' className={styles.contentItem}>Hakkımızda</Link>
+              <Link to='' className={styles.contentItem}>İletişim</Link>
             </div>
           </div>
           <div className={styles.contentGroup}>
             <h2>Müşteri Hizmetleri</h2>
             <div className={styles.contentItems}>
-              <Link to='/kvkk' className={styles.contentItem}>KVKK</Link>
-              <Link to='/onay' className={styles.contentItem}>Ticari Elektronik İleti Onayı</Link>
+              <Link to='' className={styles.contentItem}>KVKK</Link>
+              <Link to='' className={styles.contentItem}>Ticari Elektronik İleti Onayı</Link>
             </div>
           </div>
           <div className={styles.socialMediaIcons}>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FaInstagram />
+            <a href="https://github.com/keremcankurt" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/kerem-can-kurt-730434260/" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
             </a>
           </div>
+
           <div className={styles.creditCards}>
             <img  src='https://ideacdn.net/idea/mu/93/themes/selftpl_64f8849d75ae6/assets/uploads/footer_ssl_image.png?revision=7.2.8.3-12-1720796058' alt='iyzico'/>
           </div>
