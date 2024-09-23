@@ -29,19 +29,18 @@ Bu proje, gözlük satış işlemlerini gerçekleştirmek amacıyla geliştirilm
    npm start
 
 ## Uygulamadan Görüntüler
-| Resim | Açıklama |
-|-------|----------|
-| ![Image 1](public/i1.png) | Açıklama 1 |
-| ![Image 2](public/i2.png) | Açıklama 1 |
-| ![Image 3](public/i3.png) | Açıklama 1 |
-| ![Image 4](public/i4.png) | Açıklama 1 |
-| ![Image 5](public/i5.png) | Açıklama 1 |
-| ![Image 5](public/i6.png) | Açıklama 1 |
-| ![Image 5](public/i7.png) | Açıklama 1 |
-| ![Image 5](public/i8.png) | Açıklama 1 |
-| ![Image 5](public/i9.png) | Açıklama 1 |
-| ![Image 5](public/i10.png) | Açıklama 1 |
-| ![Image 5](public/i11.png) | Açıklama 1 |
-| ![Image 5](public/i12.png) | Açıklama 1 |
-| ![Image 5](public/i13.png) | Açıklama 1 |
-| ![Image 5](public/i14.png) | Açıklama 1 |
+
+![Image 1](public/i1.png) 
+![Image 2](public/i2.png) 
+![Image 3](public/i3.png) 
+![Image 4](public/i4.png) 
+![Image 5](public/i5.png) 
+![Image 5](public/i6.png) 
+![Image 5](public/i7.png) 
+![Image 5](public/i8.png) 
+![Image 5](public/i9.png)
+![Image 5](public/i10.png)
+![Image 5](public/i11.png)
+![Image 5](public/i12.png) 
+![Image 5](public/i13.png) 
+![Image 5](public/i14.png)
