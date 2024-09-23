@@ -29,8 +29,8 @@ Bu proje, gözlük satış işlemlerini gerçekleştirmek amacıyla geliştirilm
    npm start
 
 ## Uygulamadan Görüntüler
-- ![Image 1](public/i1.jpg)
-- ![Image 2](public/i2.jpg)
-- ![Image 3](public/i3.jpg)
-- ![Image 4](public/i4.jpg)
-- ![Image 5](public/i5.jpg)
+- ![Image 1](public/i1.png)
+- ![Image 2](public/i2.png)
+- ![Image 3](public/i3.png)
+- ![Image 4](public/i4.png)
+- ![Image 5](public/i5.png)
