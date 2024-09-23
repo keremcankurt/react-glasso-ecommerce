@@ -49,7 +49,7 @@ const CartDropdown = () => {
                     </li>
                 )}
                 </ul>
-                <Link className={styles['go-to-cart']} to='/order'>Sepete Git</Link>
+                <Link className={styles['go-to-cart']} to='/cart'>Sepete Git</Link>
                 </>
             ) : (
                 <p className={styles["empty-cart"]}>Sepet Boş</p>

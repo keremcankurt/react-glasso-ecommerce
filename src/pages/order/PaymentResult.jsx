@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion';
 import styles from './Order.module.scss'
+import { Link } from 'react-router-dom';
 export default function PaymentResult({ paymentStatus }) {
 
     const draw = {
@@ -45,7 +46,7 @@ export default function PaymentResult({ paymentStatus }) {
         />
       </motion.svg>
             <h2>Ödeme Başarılı!</h2>
-            <button>Siparişlerime Göz At</button>
+            <Link to="/orders">Siparişlerime Göz At</Link>
           </motion.div>
         );
       } else if (paymentStatus === 'FAILURE') {

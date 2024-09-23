@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styles from './OrderRow.module.scss';
 import { FaInfoCircle } from 'react-icons/fa';
+import { statusClassName } from '../../utils/utils';
 
 const OrderRow = ({ order, handleShipOrder, handleDeliverOrder }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -18,23 +19,7 @@ const OrderRow = ({ order, handleShipOrder, handleDeliverOrder }) => {
     const { name, value } = e.target;
     setShippingInfo({ ...shippingInfo, [name]: value });
   };
-  const statusClassName = (status) => {
-    switch (status) {
-        case "Ödeme Beklemede":
-            return "paymentPending"
-        case "Ödeme Başarısız":
-            return "paymentFailure"
-        case "Sipariş Hazırlanıyor":
-            return "preparing"
-        case "Kargoya Verildi":
-            return "shipping"
-        case "Teslim Edildi":
-            return "delivered"
-    
-        default:
-            break;
-    }
-  }
+
 
   return (
     <>

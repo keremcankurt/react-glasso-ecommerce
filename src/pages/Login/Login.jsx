@@ -32,7 +32,7 @@ export default function Login() {
     <div className={styles.loginContainer}>
       <div className={styles.loginContent}>
         <div className={styles.loginLogo}>
-            <h1>DSK-TİCARET</h1>
+            <h1>GLASSO</h1>
             <h2>HOŞGELDİNİZ</h2>
         </div>
         <form onSubmit={onSubmit} className={styles.loginMainContent}>

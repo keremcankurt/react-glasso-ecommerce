@@ -49,7 +49,7 @@ export default function DropDownMenu() {
             </li>
             :
             <li>
-            <Link to="/account" onClick={handleDropDownToggle}>Hesabım</Link>
+            <Link to="/orders" onClick={handleDropDownToggle}>Siparişlerim</Link>
             </li>
         }
         <li>

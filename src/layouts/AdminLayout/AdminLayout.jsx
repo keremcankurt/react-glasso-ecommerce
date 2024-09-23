@@ -29,7 +29,6 @@ export default function AdminLayout() {
         <nav>
           <ul>
             <li><NavLink to="" end className={(({isActive}) => isActive ? styles.activePage : '')}>Yönetim Paneli</NavLink></li>
-            <li><NavLink to="orders" className={(({isActive}) => isActive ? styles.activePage : '')}>Spiarişler</NavLink></li>
             <li><NavLink to="products" className={(({isActive}) => isActive ? styles.activePage : '')}>Ürünlerim</NavLink></li>
             <li><NavLink to="add-product" className={(({isActive}) => isActive ? styles.activePage : '')}>Yeni Ürün Ekle</NavLink></li>
             <li><NavLink to="add-campaign" className={(({isActive}) => isActive ? styles.activePage : '')}>Kampanya Düzenle</NavLink></li>

@@ -59,7 +59,7 @@ export default function ForgotPassword() {
 
     <div className={styles['forgotPassword-container']}>
         <Link to='/login' className={styles['forgotPasswordToLogin']}>Giriş ekranına dön</Link>
-        <h1 className={styles['forgotPassword-logo']}>DSK-TİCARET</h1>
+        <h1 className={styles['forgotPassword-logo']}>GLASSO</h1>
         <form className={styles['forgotPasswordForm']} onSubmit={onSubmit}>
         {token ? (
             <>

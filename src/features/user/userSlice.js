@@ -133,6 +133,7 @@ export const getCart = createAsyncThunk('user/cart', async (cart,thunkAPI) => {
           state.isLoading = false
           state.user = action.payload
           state.isSuccess = true
+          state.isError = false
         })
         .addCase(profile.rejected, (state,action) => {
           state.isLoading = false

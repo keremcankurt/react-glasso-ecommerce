@@ -20,3 +20,22 @@ export const getProductsByIds = (cart, products) => {
 
   return { availableProducts, outOfStockProducts };
 };
+
+
+export   const statusClassName = (status) => {
+  switch (status) {
+      case "Ödeme Beklemede":
+          return "paymentPending"
+      case "Ödeme Başarısız":
+          return "paymentFailure"
+      case "Sipariş Hazırlanıyor":
+          return "preparing"
+      case "Kargoya Verildi":
+          return "shipping"
+      case "Teslim Edildi":
+          return "delivered"
+  
+      default:
+          break;
+  }
+}

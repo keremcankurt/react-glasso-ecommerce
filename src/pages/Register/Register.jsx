@@ -62,7 +62,7 @@ export default function Register() {
     <div className={styles.registerContainer}>
       <div className={styles.registerContent}>
         <div className={styles.registerLogo}>
-          <h1>DSK-TİCARET</h1>
+          <h1>GLASSO</h1>
           <h2>HOŞGELDİNİZ</h2>
         </div>
         <form onSubmit={handleSubmit} className={styles.registerMainContent}>

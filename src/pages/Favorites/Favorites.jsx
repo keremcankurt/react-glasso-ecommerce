@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Favorites.module.scss'
 import { useSelector } from 'react-redux'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import Product from '../../components/Product/Product'
+import { useNavigate } from 'react-router-dom'
 export default function Favorites() {
     const [searchInput, setSearchInput] = useState("")
     
     const { products, isLoading } = useSelector((state) => state.product)
-    const { user, isLoading: userLoading } = useSelector((state) => state.user)
+    const { user, isLoading: userLoading, isError } = useSelector((state) => state.user)
+
+    const navigate = useNavigate()
+    useEffect(() => {
+      if(isError){
+        navigate("/")
+      }
+    }, [user, isError, navigate])
 
     const filteredProducts = user?.favProducts ? 
         products?.filter(p => 

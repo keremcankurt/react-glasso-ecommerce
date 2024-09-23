@@ -29,6 +29,8 @@ import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
 import OrderPage from './pages/order/Order';
 import Dashboard from './pages/AdminPanel/Dashboard/Dashboard';
 import Favorites from './pages/Favorites/Favorites';
+import Orders from './pages/Orders/Orders';
+import Search from './pages/Search/Search';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -64,7 +66,9 @@ function App() {
           <Route index={true} element={<HomePage/>}/>
           <Route path='product' element={<Product/>}/>
           <Route path='favorites' element={<Favorites/>}/>
-          <Route path='order' element={<OrderPage/>}/>
+          <Route path='cart' element={<OrderPage/>}/>
+          <Route path='orders' element={<Orders/>}/>
+          <Route path='search' element={<Search/>}/>
         </Route>
 
       </Routes>

@@ -2,23 +2,49 @@ import React from 'react';
 import styles from './Footer.module.scss';
 import { Link } from 'react-router-dom';
 import { FaInstagram } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../features/auth/authSlice';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 
 export default function Footer() {
+
+  const { user } = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(logout());
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <h1>DSK-TİCARET</h1>
+          <h1>GLASSO</h1>
         </div>
         <div className={styles.content}>
           <div className={styles.contentGroup}>
             <h2>Hesabım</h2>
             <div className={styles.contentItems}>
-              <Link to='/login' className={styles.contentItem}>Giriş Yap</Link>
-              <Link to='/register' className={styles.contentItem}>Kayıt Ol</Link>
               <Link to='/cart' className={styles.contentItem}>Sepetim</Link>
+              {
+                user ?
+                user.role === "admin" ?
+                <>
+                  <Link to='/admin' className={styles.contentItem}>Admin Paneli</Link>
+                  <Link to="/" onClick={handleClick} className={styles.contentItem}>Çıkış Yap</Link>
+                </>
+                :
+                <>
+                  <Link to='/orders' className={styles.contentItem}>Siparişlerim</Link>
+                  <Link to="/" onClick={handleClick} className={styles.contentItem}>Çıkış Yap</Link>
+                </>
+                :
+                <>
+                <Link to='/login' className={styles.contentItem}>Giriş Yap</Link>
+                <Link to='/register' className={styles.contentItem}>Kayıt Ol</Link>
+                </>
+              }
             </div>
           </div>
           <div className={styles.contentGroup}>
@@ -46,7 +72,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={styles.bottomBar}>
-        <span>DSK-TİCARET © 2024 - Tüm Hakları Saklıdır.</span>
+        <span>GLASSO © 2024 - Tüm Hakları Saklıdır.</span>
       </div>
     </footer>
   );
