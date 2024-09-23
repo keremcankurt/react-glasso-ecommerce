@@ -30,6 +30,8 @@ Bu proje, gözlük satış işlemlerini gerçekleştirmek amacıyla geliştirilm
 
 ## Uygulamadan Görüntüler
 - ![Image 1](public/i1.png)
+
+  
 - ![Image 2](public/i2.png)
 - ![Image 3](public/i3.png)
 - ![Image 4](public/i4.png)
